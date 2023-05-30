@@ -14,7 +14,7 @@ int print_pointer(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	char extra_c = 0, padd = ' ';
-	int ind = BUFFER_SIZE - 2, length = 2, padd_start = 1;
+	int ind = BUFF_SIZE - 2, length = 2, padd_start = 1;
 	unsigned long num_addrs;
 	char map_to[] = "0123456789abcdef";
 	void *addrs = va_arg(types, void *);
@@ -25,7 +25,7 @@ int print_pointer(va_list types, char buffer[],
 	if (addrs == NULL)
 		return (write(1, "(nil)", 5));
 
-	buffer[BUFFER_SIZE - 1] = '\0';
+	buffer[BUFF_SIZE - 1] = '\0';
 	UNUSED(precision);
 
 	num_addrs = (unsigned long)addrs;
@@ -77,7 +77,7 @@ int print_non_printable(va_list types, char buffer[],
 	while (str[k] != '\0')
 	{
 		if (is_printable(str[k]))
-			buffer[i + offset] = str[k];
+			buffer[k + offset] = str[k];
 		else
 			offset += append_hexa_code(str[k], buffer, k + offset);
 
@@ -120,7 +120,7 @@ int print_reverse(va_list types, char buffer[],
 
 		str = ")Null(";
 	}
-	for (k = 0; str[i]; k++)
+	for (k = 0; str[k]; k++)
 		;
 
 	for (k = k - 1; k >= 0; k--)
